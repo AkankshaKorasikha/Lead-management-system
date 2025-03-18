@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Lounge Access</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Elite Airport Lounge</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#checkin">Check-In</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h2>Welcome to Your Premium Lounge Experience</h2>
+        <p>Relax, dine, and unwind before your flight.</p>
+        <a href="#checkin" class="btn">Enter the Lounge</a>
+    </section>
+
+    <section id="checkin" class="checkin-section">
+        <div class="checkin-container">
+            <h2>Lounge Check-In</h2>
+            <p>Please provide your details to access the lounge.</p>
+            <form id="checkinForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="visitDate">Visit Date</label>
+                    <input type="date" id="visitDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="accessMethod">How did you know about us ?</label>
+                    <select id="accessMethod" required>
+                        <option value="Membership">Lounge Membership</option>
+                        <option value="Referral">Friend Referral</option>
+                        <option value="Online Booking">Online Reservation</option>
+                        <option value="Event Pass">Event Guest Pass</option>
+                        <option value="Walk-in">Walk-in Guest</option>
+                        <option value="Social Media Offer">Social Media Promotion</option>
+                        <option value="Email Promotion">Email Offer</option>
+                        <option value="Phone Booking">Phone Reservation</option>
+                        <option value="Partner Voucher">Partner Voucher</option>
+                        <option value="Advertisement">Ad Promotion</option>
+                        <option value="Trade Show Pass">Trade Show Guest</option>
+                        <option value="Cold Outreach">Staff Invitation</option>
+                        <option value="Live Chat Booking">Chat Reservation</option>
+                        <option value="Kiosk Check-in">Airport Kiosk</option>
+                        <option value="Loyalty Reward">Loyalty Reward</option>
+                    </select>
+                </div>
+                <button type="submit">Enter Lounge</button>
+            </form>
+            <div id="message" class="message"></div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Our Lounge</h2>
+        <p>Enjoy premium amenities, gourmet dining, and a tranquil environment.</p>
+    </section>
+
+    <footer>
+        <p>© 2025 Elite Airport Lounge. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

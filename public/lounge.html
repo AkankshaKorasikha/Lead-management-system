@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Lounge Access</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="lounge-container">
+        <h1>Welcome to Elite Lounge</h1>
+        <p id="timer">Time Remaining: 2:00</p>
+        <button id="extendBtn">Extend Time</button>
+        <div id="paymentSection" class="payment-section hidden">
+            <h3>Extend Your Stay</h3>
+            <p>Initiate payment to extend your lounge time by 1 minute ($10).</p>
+            <button id="payBtn">Make Payment</button>
+            <p id="paymentMessage"></p>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const visitorId = urlParams.get('visitorId');
+        let timeLeft = 120; // 2 minutes in seconds
+
+        const timerDisplay = document.getElementById('timer');
+        const extendBtn = document.getElementById('extendBtn');
+        const paymentSection = document.getElementById('paymentSection');
+        const payBtn = document.getElementById('payBtn');
+        const paymentMessage = document.getElementById('paymentMessage');
+
+        // Countdown Timer
+        const countdown = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerDisplay.textContent = 'Your lounge access has ended.';
+                extendBtn.disabled = true;
+            }
+        }, 1000);
+
+        // Extend Time Button
+        extendBtn.addEventListener('click', async () => {
+            paymentSection.classList.remove('hidden');
+            extendBtn.style.display = 'none';
+        });
+
+        // Initiate Payment
+        payBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch(`/api/visitors/${visitorId}/initiate-payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    paymentMessage.textContent = result.message;
+                    paymentMessage.style.color = '#d4af37';
+                    timeLeft += 60; // Add 1 minute to timer
+                } else {
+                    paymentMessage.textContent = 'Payment initiation failed.';
+                    paymentMessage.style.color = 'red';
+                }
+            } catch (err) {
+                paymentMessage.textContent = 'Error: ' + err.message;
+                paymentMessage.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
